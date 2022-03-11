@@ -9,7 +9,7 @@ import yaml
 KEPT_BALANCE = Web3.toWei(100, "ether")
 
 
-def deploy_token_farm_and_dapp_token(update_front_end=False):
+def deploy_token_farm_and_dapp_token(transfer_front_end=False):
     account = get_account()
     dapp_token = DappToken.deploy({"from": account})
     token_farm = TokenFarm.deploy(
@@ -25,7 +25,7 @@ def deploy_token_farm_and_dapp_token(update_front_end=False):
         weth_token: get_contract("eth_usd_price_feed"),
     }
     add_allowed_token(token_farm, allowed_token_map, account)
-    if update_front_end:
+    if transfer_front_end:
         update_front_end()
     return token_farm, dapp_token
 
